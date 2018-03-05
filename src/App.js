@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import logo from './logo.svg';
 import './App.css';
 
@@ -145,7 +146,8 @@ class App extends Component {
     //   return <p>Something went wrong.</p>
     // }
 
-    console.log(page);
+
+    console.log(page); // eslint-disable-line
     return (
       <div className="page">
         <div className="interactions">
@@ -176,7 +178,7 @@ class App extends Component {
   }
 }
 
-const Search = ({ value, onChange, onSubmit, children }) =>
+const Search = ({ value, onChange, onSubmit, children }) => // eslint-disable-line
   <form onSubmit={onSubmit}>
     <input
       type="text"
@@ -190,7 +192,7 @@ const Search = ({ value, onChange, onSubmit, children }) =>
 
 
 
-const Table = ({ list, onDismiss }) =>
+const Table = ({ list, onDismiss }) => // eslint-disable-line
   <div className="table">
     {list.map(item =>
       <div key={item.objectID} className="table-row">
@@ -230,24 +232,70 @@ const smallColumn = {
   width: '10%',
 };
 
-class Button extends Component {
-  render() {
-    const {
-      onClick,
-      className,
-      children,
-    } = this.props;
+// class Button extends Component {
+//   render() {
+//     const {
+//       onClick, className, children, // eslint-disable-line
+//     } = this.props;
 
-    return (
-      <button
-        onClick={onClick}
-        className={className}
-        type="button"
-      >
-        {children}
-      </button>
-    )
+//     return (
+//       <button
+//         onClick={onClick}
+//         className={className}
+//         type="button"
+//       >
+//         {children}
+//       </button>
+//     )
+//   }
+// }
+
+const Button = ({
+  onClick,
+  className,
+  children,
+}) =>
+<button
+onClick={onClick}
+className={className}
+type="button"
+>
+{children}
+</button>
+
+Button.defaultProps = {
+  className: '',
+}
+
+Button.prototype = {
+  onClick: PropTypes.func.isRequired,
+  className: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
+
+// Table.PropTypes = {
+//   list: PropTypes.array.isRequired,
+//   onDismiss: PropTypes.func.isRequired,
+// };
+
+Table.propTypes = {
+  list: PropTypes.arrayOf(
+    PropTypes.shape({
+      objectID: PropTypes.string.isRequired,
+      author: PropTypes.string,
+      url: PropTypes.string,
+      num_comments: PropTypes.number,
+      points: PropTypes.number,
+    })
+  ).isRequired,
+  onDismiss: PropTypes.func.isRequired,
+};
+
+Table.defaultProps = {
+  onDismiss: function () {
   }
 }
 
 export default App;
+
+export { Search, Button, Table };
