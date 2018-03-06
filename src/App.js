@@ -46,9 +46,6 @@ const list = [
   }
 ];
 
-// const isSearched = searchTerm => item =>
-//   item.title.toLowerCase().includes(searchTerm.toLowerCase());
-
 const SORTS = {
   NONE: list => list,
   TITLE: list => sortBy(list, "title"),
@@ -102,12 +99,6 @@ class App extends Component {
     this.onDismiss = this.onDismiss.bind(this);
     // this.onSort = this.onSort.bind(this);
   }
-
-  // onSort(sortKey) {
-  //   const isSortReverse =
-  //     this.state.sortKey === sortKey && !this.state.isSortReverse;
-  //   this.setState({ sortKey, isSortReverse });
-  // }
 
   needsToSearchTopStories(searchTerm) {
     return !this.state.results[searchTerm];
@@ -183,10 +174,6 @@ class App extends Component {
     const list =
       (results && results[searchKey] && results[searchKey].hits) || [];
 
-    // if( error ) {
-    //   return <p>Something went wrong.</p>
-    // }
-
     return (
       <div className="page">
         <div className="interactions">
@@ -223,35 +210,6 @@ class App extends Component {
     );
   }
 }
-
-// class Search extends Component {
-//   componentDidMount() {
-//     this.input.focus();
-//   }
-
-//   render() {
-//     const {
-//       value,
-//       onChange,
-//       onSubmit,
-//       children
-//     } = this.props;
-
-//     return (
-//       <form onSubmit={onSubmit}>
-//         <input
-//           type="text"
-//           value={value}
-//           onChange={onChange}
-//           ref={(node) => { this.input = node; }}
-//         />
-//         <button type="submit">
-//         {children}
-//         </button>
-//       </form>
-//     )
-//   }
-// }
 
 const Search = ({ value, onChange, onSubmit, children }) => {
   let input;
@@ -366,57 +324,6 @@ class Table extends Component {
     );
   }
 }
-
-// class Button extends Component {
-//   render() {
-//     const {
-//       onClick, className, children, // eslint-disable-line
-//     } = this.props;
-
-//     return (
-//       <button
-//         onClick={onClick}
-//         className={className}
-//         type="button"
-//       >
-//         {children}
-//       </button>
-//     )
-//   }
-// }
-
-// const Button = ({ onClick, className, children }) => (
-//   <button onClick={onClick} className={className} type="button">
-//     {children}
-//   </button>
-// );
-
-// Button.defaultProps = {
-//   className: ""
-// };
-
-// Button.prototype = {
-//   onClick: PropTypes.func.isRequired,
-//   className: PropTypes.string,
-//   children: PropTypes.node.isRequired
-// };
-
-// Table.propTypes = {
-//   list: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       objectID: PropTypes.string.isRequired,
-//       author: PropTypes.string,
-//       url: PropTypes.string,
-//       num_comments: PropTypes.number,
-//       points: PropTypes.number
-//     })
-//   ).isRequired,
-//   onDismiss: PropTypes.func.isRequired
-// };
-
-// Table.defaultProps = {
-//   onDismiss: function() {}
-// };
 
 export default App;
 
